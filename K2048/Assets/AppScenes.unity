@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 103806881}
   - component: {fileID: 103806886}
   - component: {fileID: 103806885}
+  - component: {fileID: 103806887}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -443,6 +444,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37a5d6ca1a864f4eac8c2e126454d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &103806887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 103806880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d8eecb8e6224eb6994acccd1c17939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TileStyles:
+  - Number: 2
+    TileColor:
+      serializedVersion: 2
+      rgba: 4282785484
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294830028
+  - Number: 4
+    TileColor:
+      serializedVersion: 2
+      rgba: 4281358564
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294957225
+  - Number: 8
+    TileColor:
+      serializedVersion: 2
+      rgba: 4280781802
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  - Number: 16
+    TileColor:
+      serializedVersion: 2
+      rgba: 4281123060
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  - Number: 32
+    TileColor:
+      serializedVersion: 2
+      rgba: 4281524726
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  - Number: 64
+    TileColor:
+      serializedVersion: 2
+      rgba: 4281128896
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  - Number: 128
+    TileColor:
+      serializedVersion: 2
+      rgba: 4281646464
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  - Number: 256
+    TileColor:
+      serializedVersion: 2
+      rgba: 4282099738
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  - Number: 512
+    TileColor:
+      serializedVersion: 2
+      rgba: 4283407894
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  - Number: 1024
+    TileColor:
+      serializedVersion: 2
+      rgba: 4286549267
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  - Number: 2048
+    TileColor:
+      serializedVersion: 2
+      rgba: 4288182544
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  - Number: 4096
+    TileColor:
+      serializedVersion: 2
+      rgba: 4288437530
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
 --- !u!1 &180602430
 GameObject:
   m_ObjectHideFlags: 0
