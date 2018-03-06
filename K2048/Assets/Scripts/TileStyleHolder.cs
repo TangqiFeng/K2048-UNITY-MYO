@@ -13,7 +13,7 @@ public class TileStyle {
 public class TileStyleHolder : MonoBehaviour {
 
 	// singleton 
-	private static TileStyleHolder Instance;
+	public static TileStyleHolder Instance;
 
 	public TileStyle[] TileStyles;
 
