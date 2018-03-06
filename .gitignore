@@ -1,14 +1,14 @@
-/library/
-/Library/
-/temp/
-/Temp/
-/obj/
-/Obj/
-/build/
-/Build/
-/builds/
-/Builds/
-/Assets/AssetStoreTools*
+K2048/library/
+K2048/Library/
+K2048/temp/
+K2048/Temp/
+K2048/obj/
+K2048/Obj/
+K2048/build/
+K2048/Build/
+K2048/builds/
+K2048/Builds/
+K2048/Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory
 /.vs/

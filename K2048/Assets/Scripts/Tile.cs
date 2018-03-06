@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Tile : MonoBehaviour {
 
+	// identify the tile in 'AllTiles' (GameManager.cs)
+	public int indRow;
+	public int indCol;
+
 	// interface fot interact with number(private)
 	public int Number{ 
 		get{
