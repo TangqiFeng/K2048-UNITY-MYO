@@ -5,16 +5,36 @@ using UnityEngine.UI;
 
 public class Tile : MonoBehaviour {
 
+	// interface fot interact with number(private)
+	public int Number{ 
+		get{
+			return number;
+		}
+		set{
+			number = value;
+			// if new tile is 0 then move it. otherwise get its style.
+			if (number == 0)
+				SetEmpty ();
+			else {
+				GetStyle (number);
+				SetVisible (); 
+			}
+		}
+	}
+
+	// goal number
+	private int number;
+
 	private Text TileText;
 	private Image TileImage;
 
 	void Awake(){
-		TileText = GetComponentsInChildren<Text> ();
+		TileText = GetComponentInChildren<Text> ();
 		TileImage = transform.Find ("NumberCell").GetComponent<Image> ();
 	}
 
 	void GetStyleFromHolder (int index){
-		TileText.text = TileStyleHolder.Instance.TileStyles [index].Number;
+		TileText.text = TileStyleHolder.Instance.TileStyles [index].Number.ToString();
 		TileText.color = TileStyleHolder.Instance.TileStyles [index].TextColor;
 		TileImage.color = TileStyleHolder.Instance.TileStyles [index].TileColor;
 	}
@@ -61,6 +81,18 @@ public class Tile : MonoBehaviour {
 			Debug.LogError ("Check the number you pass to GetStyle() !");
 			break;
 		}
+	}
+
+	// create tile
+	private void SetVisible(){
+		TileImage.enabled = true;
+		TileText.enabled = true;
+	}
+
+	// move tile
+	private void SetEmpty(){
+		TileImage.enabled = false;
+		TileText.enabled = false;
 	}
 
 	// Use this for initialization
