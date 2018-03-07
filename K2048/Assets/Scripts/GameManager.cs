@@ -93,5 +93,28 @@ public class GameManager : MonoBehaviour {
 	public void Move (MoveDirection md)
 	{
 		Debug.Log (md.ToString () + " move.");
+		// create game logic.
+		// there are 4 rows and 4 columns
+		// so, for each line should affect
+		for(int i = 0; i < rows.Count; i++){
+			// switch four direction moves
+			switch (md) {
+				case MoveDirection.Down: 
+				// shift tiles, which means if there exist empty tile, then shift
+				// correct tile to that position.
+				while(MakeOneMoveUpIndex(columns[i])) {}
+				break;
+				case MoveDirection.Left: 
+				while(MakeOneMoveDownIndex(rows[i])) {}
+				break;
+				case MoveDirection.Right: 
+				while(MakeOneMoveUpIndex(rows[i])) {}
+				break;
+				case MoveDirection.Up: 
+				while(MakeOneMoveDownIndex(columns[i])) {}
+				break;
+
+			}
+		}
 	}
 }
