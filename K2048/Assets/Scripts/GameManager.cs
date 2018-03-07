@@ -38,16 +38,28 @@ public class GameManager : MonoBehaviour {
 	}
 
 	/* there are two type moves:
-	 * 1) move right and down --> up index --> scan index increase
-	 * 2) move left and up --> down index --> scan index decrease
+	 * 1) move right and down --> up index --> move index increase
+	 * 2) move left and up --> down index --> move index decrease
 	 */
 	// the method of tile shifting in down index, return T/F
 	bool MakeOneMoveDownIndex(Tile[] LineOfTiles){
+		// for each line tile position, first check moving, then merge
 		for (int i = 0; i < LineOfTiles.Length - 1; i++) {
-			// move bloke, if current tile is empty & next is not empty, then move
+			// move block, if current tile is empty & next is not empty, then move
 			if(LineOfTiles [i].Number == 0 && LineOfTiles[i + 1].Number != 0){
 				LineOfTiles [i].Number = LineOfTiles [i + 1].Number;
 				LineOfTiles [i + 1].Number = 0;
+				return true;
+			}
+			// merge block
+			// check two tiles have same number ot is/not merged once
+			if (LineOfTiles [i].Number != 0 &&
+				LineOfTiles [i].Number == LineOfTiles [i + 1].Number &&
+				LineOfTiles [i].MergeThisTurn == false &&
+				LineOfTiles [i+1].MergeThisTurn == false) {
+				LineOfTiles [i].Number *= 2;
+				LineOfTiles [i + 1].Number = 0;
+				LineOfTiles [i].MergeThisTurn = true;
 				return true;
 			}
 		}
@@ -55,11 +67,23 @@ public class GameManager : MonoBehaviour {
 	}
 	// the method of tile shifting in up index, return T/F
 	bool MakeOneMoveUpIndex(Tile[] LineOfTiles){
+		// for each line tile position, first check moving, then merge
 		for (int i = LineOfTiles.Length - 1; i > 0; i--) {
-			// move bloke, if current tile is empty & next is not empty, then move
+			// move block, if current tile is empty & next is not empty, then move
 			if(LineOfTiles [i].Number == 0 && LineOfTiles[i - 1].Number != 0){
 				LineOfTiles [i].Number = LineOfTiles [i - 1].Number;
 				LineOfTiles [i - 1].Number = 0;
+				return true;
+			}
+			// merge block
+			// check two tiles have same number ot is/not merged once
+			if (LineOfTiles [i].Number != 0 &&
+				LineOfTiles [i].Number == LineOfTiles [i - 1].Number &&
+				LineOfTiles [i].MergeThisTurn == false &&
+				LineOfTiles [i - 1].MergeThisTurn == false) {
+				LineOfTiles [i].Number *= 2;
+				LineOfTiles [i - 1].Number = 0;
+				LineOfTiles [i].MergeThisTurn = true;
 				return true;
 			}
 		}
@@ -90,9 +114,20 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	// the method to reset all tiles' merge status
+	public void ResetMergedFlags(){
+		foreach (Tile t in AllTiles) {
+			t.MergeThisTurn = false;
+		}
+	}
+
 	public void Move (MoveDirection md)
 	{
 		Debug.Log (md.ToString () + " move.");
+
+		// reset merged flag to false
+		ResetMergedFlags();
+
 		// create game logic.
 		// there are 4 rows and 4 columns
 		// so, for each line should affect

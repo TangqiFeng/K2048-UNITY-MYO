@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Tile : MonoBehaviour {
 
+	// make sure ONLY merge ONCE
+	public bool MergeThisTurn = false;
+
 	// identify the tile in 'AllTiles' (GameManager.cs)
 	public int indRow;
 	public int indCol;
