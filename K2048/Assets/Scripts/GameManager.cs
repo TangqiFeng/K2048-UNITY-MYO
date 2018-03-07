@@ -35,6 +35,10 @@ public class GameManager : MonoBehaviour {
 		columns.Add(new Tile[]{AllTiles[0,1],AllTiles[1,1],AllTiles[2,1],AllTiles[3,1]});
 		columns.Add(new Tile[]{AllTiles[0,2],AllTiles[1,2],AllTiles[2,2],AllTiles[3,2]});
 		columns.Add(new Tile[]{AllTiles[0,3],AllTiles[1,3],AllTiles[2,3],AllTiles[3,3]});
+
+		// automatically generate two tiles when game start
+		Generate();
+		Generate();
 	}
 
 	/* there are two type moves:
@@ -106,13 +110,14 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		// add event to test method 'Generate'
-		if (Input.GetKeyDown (KeyCode.G)) {
-			Generate ();
-		}
-	}
+//	// Update is called once per frame
+//	void Update () {
+//		// add event to test method 'Generate'
+//		if (Input.GetKeyDown (KeyCode.G)) {
+//			Generate ();
+//		}
+//	}
+
 
 	// the method to reset all tiles' merge status
 	public void ResetMergedFlags(){
@@ -148,8 +153,10 @@ public class GameManager : MonoBehaviour {
 				case MoveDirection.Up: 
 				while(MakeOneMoveDownIndex(columns[i])) {}
 				break;
-
 			}
 		}
+
+		// add a new tile after the move finished
+		Generate();
 	}
 }
