@@ -35,8 +35,37 @@ public class GameManager : MonoBehaviour {
 		columns.Add(new Tile[]{AllTiles[0,1],AllTiles[1,1],AllTiles[2,1],AllTiles[3,1]});
 		columns.Add(new Tile[]{AllTiles[0,2],AllTiles[1,2],AllTiles[2,2],AllTiles[3,2]});
 		columns.Add(new Tile[]{AllTiles[0,3],AllTiles[1,3],AllTiles[2,3],AllTiles[3,3]});
-
 	}
+
+	/* there are two type moves:
+	 * 1) move right and down --> up index --> scan index increase
+	 * 2) move left and up --> down index --> scan index decrease
+	 */
+	// the method of tile shifting in down index, return T/F
+	bool MakeOneMoveDownIndex(Tile[] LineOfTiles){
+		for (int i = 0; i < LineOfTiles.Length - 1; i++) {
+			// move bloke, if current tile is empty & next is not empty, then move
+			if(LineOfTiles [i].Number == 0 && LineOfTiles[i + 1].Number != 0){
+				LineOfTiles [i].Number = LineOfTiles [i + 1].Number;
+				LineOfTiles [i + 1].Number = 0;
+				return true;
+			}
+		}
+		return false;
+	}
+	// the method of tile shifting in up index, return T/F
+	bool MakeOneMoveUpIndex(Tile[] LineOfTiles){
+		for (int i = LineOfTiles.Length - 1; i > 0; i--) {
+			// move bloke, if current tile is empty & next is not empty, then move
+			if(LineOfTiles [i].Number == 0 && LineOfTiles[i - 1].Number != 0){
+				LineOfTiles [i].Number = LineOfTiles [i - 1].Number;
+				LineOfTiles [i - 1].Number = 0;
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	// generate a new tile (with number 2/4)
 	void Generate(){
