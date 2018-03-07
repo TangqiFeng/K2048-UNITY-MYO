@@ -118,6 +118,17 @@ public class GameManager : MonoBehaviour {
 //		}
 //	}
 
+	// after each move, we need to update the Empty Tiles list
+	// otherwise, we can only add 16 new tiles...
+	private void UpdateEmptyTiles(){
+		// step 1, clear the list
+		EmptyTiles.Clear();
+		// step 2, loop each element, to add empty tiles to the list
+		foreach(Tile t in AllTiles){
+			if (t.Number == 0)
+				EmptyTiles.Add (t);
+		}
+	}
 
 	// the method to reset all tiles' merge status
 	public void ResetMergedFlags(){
@@ -156,7 +167,9 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
+		// update empty tile list
+		UpdateEmptyTiles();
 		// add a new tile after the move finished
-		Generate();
+		Generate(); 
 	}
 }
