@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour {
 				LineOfTiles [i].Number *= 2;
 				LineOfTiles [i + 1].Number = 0;
 				LineOfTiles [i].MergeThisTurn = true;
+
+				// tracking score
+				ScoreChecker.Instance.Score += LineOfTiles[i].Number;
 				return true;
 			}
 		}
@@ -94,6 +97,9 @@ public class GameManager : MonoBehaviour {
 				LineOfTiles [i].Number *= 2;
 				LineOfTiles [i - 1].Number = 0;
 				LineOfTiles [i].MergeThisTurn = true;
+
+				// tracking score
+				ScoreChecker.Instance.Score += LineOfTiles[i].Number; 
 				return true;
 			}
 		}
