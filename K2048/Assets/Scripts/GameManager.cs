@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+	// game won object, use type GameObject, then can display them in hierarchy
+	public GameObject GameWonText;
 	// game over related elements
-	public Text GameOverText;
+	public GameObject GameOverText;
 	public Text GameOverScoreText;
 	public GameObject GameOverPanel; 
 
@@ -45,6 +47,17 @@ public class GameManager : MonoBehaviour {
 		// automatically generate two tiles when game start
 		Generate();
 		Generate();
+	}
+
+	// handle game won
+	private void YouWon(){
+		// set message to 'you won'
+		GameOverText.SetActive (false);
+		GameWonText.SetActive (true);
+		// get current score
+		GameOverScoreText.text = ScoreChecker.Instance.Score.ToString ();
+		// display the GameOverPanel
+		GameOverPanel.SetActive (true);
 	}
 
 	// handle game over 
@@ -108,6 +121,10 @@ public class GameManager : MonoBehaviour {
 
 				// tracking score
 				ScoreChecker.Instance.Score += LineOfTiles[i].Number;
+
+				// check game is/not won
+				if (LineOfTiles [i].Number == 2048)
+					YouWon ();
 				return true;
 			}
 		}
@@ -135,6 +152,10 @@ public class GameManager : MonoBehaviour {
 
 				// tracking score
 				ScoreChecker.Instance.Score += LineOfTiles[i].Number; 
+
+				// check game is/not won
+				if (LineOfTiles [i].Number == 2048)
+					YouWon ();
 				return true;
 			}
 		}
