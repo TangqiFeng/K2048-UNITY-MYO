@@ -695,6 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 3
   indCol: 2
 --- !u!1 &227451777
@@ -1217,6 +1218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 1
   indCol: 2
 --- !u!1 &522458653
@@ -1374,6 +1376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 1
   indCol: 1
 --- !u!1 &577456323
@@ -1600,6 +1603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 0
   indCol: 3
 --- !u!1 &771132878
@@ -2228,6 +2232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 0
   indCol: 1
 --- !u!1 &1037673589
@@ -2521,6 +2526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 0
   indCol: 2
 --- !u!1 &1213587550
@@ -2604,6 +2610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 1
   indCol: 0
 --- !u!1 &1288054583
@@ -2687,6 +2694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 3
   indCol: 3
 --- !u!1 &1297122997
@@ -2913,6 +2921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 3
   indCol: 0
 --- !u!1 &1486288330
@@ -2996,6 +3005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 3
   indCol: 1
 --- !u!1 &1490385705
@@ -3298,6 +3308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 1
   indCol: 3
 --- !u!1 &1660765146
@@ -3875,6 +3886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 0
   indCol: 0
 --- !u!1 &1900946114
@@ -4175,6 +4187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 2
   indCol: 2
 --- !u!1 &1975261339
@@ -4312,7 +4325,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -4333,7 +4346,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1977867958}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 103806886}
+        m_MethodName: NewGameButtonHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1977867958
@@ -4450,6 +4474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 2
   indCol: 1
 --- !u!1 &1990864934
@@ -4967,6 +4992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 2
   indCol: 3
 --- !u!1 &2102519264
@@ -5050,6 +5076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15896229ce55439a8e353964cd047c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MergeThisTurn: 0
   indRow: 2
   indCol: 0
 --- !u!1 &2135217787

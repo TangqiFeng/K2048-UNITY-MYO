@@ -41,6 +41,12 @@ public class GameManager : MonoBehaviour {
 		Generate();
 	}
 
+	// start a new game
+	public void NewGameButtonHandler(){
+		// restart the scene
+		Application.LoadLevel (Application.loadedLevel);
+	}
+
 	/* there are two type moves:
 	 * 1) move right and down --> up index --> move index increase
 	 * 2) move left and up --> down index --> move index decrease
