@@ -141,6 +141,11 @@ public class GameManager : MonoBehaviour {
 	{
 		Debug.Log (md.ToString () + " move.");
 
+		// there is a sinatio: if no moves and merges when trigger a direction
+		// it should not generate a new tile.
+		// MoveMade is to aviod this bug.
+		bool MoveMade = false;
+
 		// reset merged flag to false
 		ResetMergedFlags();
 
@@ -153,23 +158,35 @@ public class GameManager : MonoBehaviour {
 				case MoveDirection.Down: 
 				// shift tiles, which means if there exist empty tile, then shift
 				// correct tile to that position.
-				while(MakeOneMoveUpIndex(columns[i])) {}
+				while(MakeOneMoveUpIndex(columns[i])) {
+					// set MoveMade = true
+					MoveMade = true;
+				}
 				break;
 				case MoveDirection.Left: 
-				while(MakeOneMoveDownIndex(rows[i])) {}
+				while(MakeOneMoveDownIndex(rows[i])) {
+					MoveMade = true;
+				}
 				break;
 				case MoveDirection.Right: 
-				while(MakeOneMoveUpIndex(rows[i])) {}
+				while(MakeOneMoveUpIndex(rows[i])) {
+					MoveMade = true;
+				}
 				break;
 				case MoveDirection.Up: 
-				while(MakeOneMoveDownIndex(columns[i])) {}
+				while(MakeOneMoveDownIndex(columns[i])) {
+					MoveMade = true;
+				}
 				break;
 			}
 		}
 
-		// update empty tile list
-		UpdateEmptyTiles();
-		// add a new tile after the move finished
-		Generate(); 
+		// ckeck the MoveMade value, avoid generating a new tile when there have no moves
+		if (MoveMade) {
+			// update empty tile list
+			UpdateEmptyTiles();
+			// add a new tile after the move finished
+			Generate (); 
+		}
 	}
 }
