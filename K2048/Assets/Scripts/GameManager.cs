@@ -1,8 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class GameManager : MonoBehaviour {
+
+	// game over related elements
+	public Text GameOverText;
+	public Text GameOverScoreText;
+	public GameObject GameOverPanel; 
 
 	// store tiles (in Start method, the array will be deleted after executed)
 	private Tile[,] AllTiles = new Tile[4, 4];
@@ -39,6 +45,35 @@ public class GameManager : MonoBehaviour {
 		// automatically generate two tiles when game start
 		Generate();
 		Generate();
+	}
+
+	// handle game over 
+	private void GameOver(){
+		// get current score
+		GameOverScoreText.text = ScoreChecker.Instance.Score.ToString ();
+		// display the GameOverPanel
+		GameOverPanel.SetActive (true);
+	}
+
+	// check the game is/not over, with no chance to move
+	bool CanMove(){
+		// if there exist empty tiles, means can move
+		if (EmptyTiles.Count > 0)
+			return true;
+		else {
+			// check there exist tiles can merging
+			// check rows
+			for (int i = 0; i < rows.Count; i++)
+				for (int j = 0; j < columns.Count - 1; j++)
+					if (AllTiles [i, j].Number == AllTiles [i, j + 1].Number)
+						return true;
+			// check columns
+			for (int i = 0; i < columns.Count; i++)
+				for (int j = 0; j < rows.Count - 1; j++)
+					if (AllTiles [j, i].Number == AllTiles [j + 1, i].Number)
+						return true;
+		}
+		return false; 
 	}
 
 	// start a new game
@@ -199,6 +234,11 @@ public class GameManager : MonoBehaviour {
 			UpdateEmptyTiles();
 			// add a new tile after the move finished
 			Generate (); 
+
+			// check game is/not over
+			if(!CanMove()){
+				GameOver ();
+			}
 		}
 	}
 }
