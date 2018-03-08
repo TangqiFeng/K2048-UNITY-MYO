@@ -29,6 +29,9 @@ public class ScoreChecker : MonoBehaviour {
 	}
 
 	void Awake(){
+//		// clear high score manually
+//		PlayerPrefs.DeleteAll ();
+
 		Instance = this;
 
 		// PlayerPrefs -> Stores and accesses player preferences between game sessions.
