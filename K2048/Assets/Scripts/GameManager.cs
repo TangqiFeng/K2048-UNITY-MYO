@@ -3,7 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
+// state for status through Coroutine delay
+public enum GameState{
+	Playing,
+	GameOver,
+	WaitingForMove
+}
+
 public class GameManager : MonoBehaviour {
+
+	// NEW AFTER ADDED DELAYS
+	public GameState State;
+	[Range(0, 2f)] // generate a slider for range 0 - 2f of delay variable
+	public float delay;
+	// local variable, related delay
+	private bool[] lineMoveComplete = new bool[4]{true, true, true, true};
+	// ...........................
+
+	// declare at top, used for delay and the bug (do not add new tail if no move made)
+	private bool MoveMade; 
 
 	// game won object, use type GameObject, then can display them in hierarchy
 	public GameObject GameWonText;
@@ -212,54 +230,132 @@ public class GameManager : MonoBehaviour {
 		// there is a sinatio: if no moves and merges when trigger a direction
 		// it should not generate a new tile.
 		// MoveMade is to aviod this bug.
-		bool MoveMade = false;
+		MoveMade = false;
 
 		// reset merged flag to false
 		ResetMergedFlags();
 
-		// create game logic.
-		// there are 4 rows and 4 columns
-		// so, for each line should affect
-		for(int i = 0; i < rows.Count; i++){
-			// switch four direction moves
-			switch (md) {
+		// check delay is/not set
+		if (delay > 0)
+			StartCoroutine (MoveCoroutine (md));
+		else {
+			// create game logic.
+			// there are 4 rows and 4 columns
+			// so, for each line should affect
+			for(int i = 0; i < rows.Count; i++){
+				// switch four direction moves
+				switch (md) {
 				case MoveDirection.Down: 
-				// shift tiles, which means if there exist empty tile, then shift
-				// correct tile to that position.
-				while(MakeOneMoveUpIndex(columns[i])) {
-					// set MoveMade = true
-					MoveMade = true;
-				}
-				break;
+					// shift tiles, which means if there exist empty tile, then shift
+					// correct tile to that position.
+					while(MakeOneMoveUpIndex(columns[i])) {
+						// set MoveMade = true
+						MoveMade = true;
+					}
+					break;
 				case MoveDirection.Left: 
-				while(MakeOneMoveDownIndex(rows[i])) {
-					MoveMade = true;
-				}
-				break;
+					while(MakeOneMoveDownIndex(rows[i])) {
+						MoveMade = true;
+					}
+					break;
 				case MoveDirection.Right: 
-				while(MakeOneMoveUpIndex(rows[i])) {
-					MoveMade = true;
-				}
-				break;
+					while(MakeOneMoveUpIndex(rows[i])) {
+						MoveMade = true;
+					}
+					break;
 				case MoveDirection.Up: 
-				while(MakeOneMoveDownIndex(columns[i])) {
-					MoveMade = true;
+					while(MakeOneMoveDownIndex(columns[i])) {
+						MoveMade = true;
+					}
+					break;
 				}
-				break;
+			}
+
+			// ckeck the MoveMade value, avoid generating a new tile when there have no moves
+			if (MoveMade) {
+				// update empty tile list
+				UpdateEmptyTiles();
+				// add a new tile after the move finished
+				Generate (); 
+
+				// check game is/not over
+				if(!CanMove()){
+					GameOver ();
+				}
 			}
 		}
+	}
 
-		// ckeck the MoveMade value, avoid generating a new tile when there have no moves
-		if (MoveMade) {
-			// update empty tile list
-			UpdateEmptyTiles();
-			// add a new tile after the move finished
-			Generate (); 
+	/* these are coroutine for delay between current move and next move.
+	 * show user the moving track
+	 */
+	IEnumerator MoveCoroutine(MoveDirection md)
+	{
+		State = GameState.WaitingForMove;
 
-			// check game is/not over
-			if(!CanMove()){
-				GameOver ();
-			}
+		// start moving each line with delays depending on MoveDirection md
+		switch (md) 
+		{
+		case MoveDirection.Down:
+			for (int i = 0; i< columns.Count; i++)
+				StartCoroutine(MoveOneLineUpIndexCoroutine(columns[i], i));
+			break;
+		case MoveDirection.Left: 
+			for (int i = 0; i< rows.Count; i++)
+				StartCoroutine(MoveOneLineDownIndexCoroutine(rows[i], i));
+			break;
+		case MoveDirection.Right:
+			for (int i = 0; i< rows.Count; i++)
+				StartCoroutine(MoveOneLineUpIndexCoroutine(rows[i], i));
+			break;
+		case MoveDirection.Up: 
+			for (int i = 0; i< columns.Count; i++)
+				StartCoroutine(MoveOneLineDownIndexCoroutine(columns[i], i));
+			break;
+
 		}
+
+		// Wait until the move is over in all lines
+		while (! (lineMoveComplete[0] && lineMoveComplete[1] && lineMoveComplete[2] && lineMoveComplete[3]))
+			yield return null;
+
+		if (MoveMade) 
+		{
+			UpdateEmptyTiles ();
+			Generate ();
+
+			if (!CanMove())
+			{
+				GameOver();
+			}
+
+		}
+
+		State = GameState.Playing;
+		StopAllCoroutines ();
+	}
+
+	IEnumerator MoveOneLineUpIndexCoroutine(Tile[] line, int index)
+	{
+		lineMoveComplete [index] = false;
+		while (MakeOneMoveUpIndex(line)) 
+		{
+			MoveMade = true;
+			// delay next step
+			yield return new WaitForSeconds(delay);
+		}
+		lineMoveComplete [index] = true;
+	}
+
+	IEnumerator MoveOneLineDownIndexCoroutine(Tile[] line, int index)
+	{
+		lineMoveComplete [index] = false;
+		while (MakeOneMoveDownIndex(line)) 
+		{
+			MoveMade = true;
+			// delay next step
+			yield return new WaitForSeconds(delay);
+		}
+		lineMoveComplete [index] = true;
 	}
 }
