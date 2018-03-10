@@ -137,6 +137,9 @@ public class GameManager : MonoBehaviour {
 				LineOfTiles [i + 1].Number = 0;
 				LineOfTiles [i].MergeThisTurn = true;
 
+				// set merge animation to new tile
+				LineOfTiles[i].PlayMergeAnimation();
+
 				// tracking score
 				ScoreChecker.Instance.Score += LineOfTiles[i].Number;
 
@@ -168,6 +171,9 @@ public class GameManager : MonoBehaviour {
 				LineOfTiles [i - 1].Number = 0;
 				LineOfTiles [i].MergeThisTurn = true;
 
+				// set merge animation to new tile
+				LineOfTiles[i].PlayMergeAnimation();
+
 				// tracking score
 				ScoreChecker.Instance.Score += LineOfTiles[i].Number; 
 
@@ -192,6 +198,10 @@ public class GameManager : MonoBehaviour {
 				EmptyTiles [indexForNewNumber].Number = 4;
 			else
 				EmptyTiles [indexForNewNumber].Number = 2;
+
+			// set appear animation to new tile
+			EmptyTiles[indexForNewNumber].PlayAppearAnimation();
+
 			EmptyTiles.RemoveAt (indexForNewNumber);
 		}
 	}

@@ -35,9 +35,22 @@ public class Tile : MonoBehaviour {
 	private Text TileText;
 	private Image TileImage;
 
+	// for control animation, get reference to animator
+	private Animator anim;
+
 	void Awake(){
+		anim = GetComponent<Animator> ();
 		TileText = GetComponentInChildren<Text> ();
 		TileImage = transform.Find ("NumberCell").GetComponent<Image> ();
+	}
+
+	// cause all the moving/shifting/merging of tiles are down in the GameManager
+	// here need to access animations from GameManager
+	public void PlayMergeAnimation(){
+		anim.SetTrigger ("Merge");
+	}
+	public void PlayAppearAnimation(){
+		anim.SetTrigger ("Appear");
 	}
 
 	void GetStyleFromHolder (int index){
