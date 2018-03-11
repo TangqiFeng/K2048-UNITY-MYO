@@ -109,6 +109,9 @@ public class GameManager : MonoBehaviour {
 
 	// start a new game
 	public void NewGameButtonHandler(){
+		// disable current myo hub,
+		ThalmicHub hub = ThalmicHub.instance;
+		DestroyImmediate(hub);
 		// restart the scene
 		Application.LoadLevel (Application.loadedLevel);
 	}

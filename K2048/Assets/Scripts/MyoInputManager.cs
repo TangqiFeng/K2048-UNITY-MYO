@@ -74,8 +74,11 @@ public class MyoInputManager : MonoBehaviour {
 				// Vibrate the Myo armband when a DoubleTap is made.
 				thalmicMyo.Vibrate (VibrationType.Medium);
 				// Restart Game
+				// disable current hub,
+				ThalmicHub hub = ThalmicHub.instance;
+				DestroyImmediate(hub);
 				gm.NewGameButtonHandler ();
-				ExtendUnlockAndNotifyUserAction (thalmicMyo);
+				//ExtendUnlockAndNotifyUserAction (thalmicMyo);
 			}
 		}
 	}
