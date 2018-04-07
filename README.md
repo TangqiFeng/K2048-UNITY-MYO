@@ -23,7 +23,7 @@ This application is a local implementation of the application using gestures ([M
 
 ### How to run
 
-download/clone this repository, open eith Unity, and run... ...
+download/clone this repository, open with Unity, and run... ...
 
 ### Purpose of the application
 
