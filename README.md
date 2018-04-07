@@ -21,6 +21,10 @@ This application is a local implementation of the application using gestures ([M
 
 ![game over](https://github.com/TangqiFeng/K2048-UNITY-MYO/blob/img/youwon.gif)
 
+### How to run
+
+download/clone this repository, open eith Unity, and run... ...
+
 ### Purpose of the application
 
 2048 is a single-player sliding block puzzle game by Italian web developer Gabriele Cirulli. Also there are many versions on different platforms already. These games works with keyboards on PCs, with touch screen input on mobile devices. But no one  can control the game with gesture.
