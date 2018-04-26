@@ -1,6 +1,6 @@
 # K2048-UNITY-MYO
 
-2048 game with MYO developing using Unityn writing in c#.
+2048 game with MYO developing using Unity writing in c#.
 
 > author: [Tangqi Feng](https://tangqifeng.github.io/)
 
@@ -44,6 +44,7 @@ It is perfect to design as this:
 * move down -> fist
 * move left -> wave left
 * move right -> wave right
+* restart game -> double tap
 
 ### Architecture for the solution
 
