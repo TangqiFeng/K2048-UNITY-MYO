@@ -11,6 +11,8 @@ This application is a local implementation of the application using gestures ([M
 
 ##### Feature demo (working with myo)
 
+[YouTube Link](https://youtu.be/y3od9nPmPWc)
+
 ![working with myo](https://github.com/TangqiFeng/K2048-UNITY-MYO/blob/img/myoshow2.gif)
 
 ##### Feature demo (game over)
